@@ -29,10 +29,10 @@ jobs:
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
-      # Робот возьмет icon.png и превратит в аватарку приложения
+      # Команда сборки теперь чистая, без капризных флагов
       - name: Build Android APK
         run: |
-          yes | flet build apk --icon icon.png
+          yes | flet build apk
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
