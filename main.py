@@ -3,7 +3,7 @@ import flet as ft
 def main(page: ft.Page):
     page.title = "CyberDesk: Подслушано в Сети"
     
-    # Указываем точное имя твоей картинки для аватарки приложения
+    # Иконка приложения
     page.icon = "icongame.png"
     
     page.theme_mode = ft.ThemeMode.DARK
@@ -110,7 +110,7 @@ def main(page: ft.Page):
             choices_view.controls.append(ft.ElevatedButton(content=ft.Text("Перезапустить игру 🔄"), on_click=lambda _: scene_router("day1_start")))
 
         elif scene_name == "ending_rebel_ai":
-            terminal_output.value = "=== ФИНАЛ 4: КИБЕР-ПРИЗРАК (ЛУЧШИЙ ФИНАЛ) ===\n\nПолиция пытается взломать твой terminal, но спасенный тобой ИИ ИРИС блокирует их сканеры! В этот же миг спасенный хакер `@neon_ghost` взрывает сервера полиции по твоему адресу!\n\nДвери блокируются, системы тушат свет. ИРИС открывает для тебя секретный лифт. Ты сбегаешь в подземный город к повстанцам, держа в руках ключ от тайн Корпорации.\n\nНачинается новая глава Сопротивления! ✊"
+            terminal_output.value = "=== ФИНАЛ 4: КИБЕР-ПРИЗРАК (ЛУЧШИЙ ФИНАЛ) ===\n\nПолиция пытается взломать твой терминал, но спасенный тобой ИИ ИРИС блокирует их сканеры! В этот же миг спасенный хакер `@neon_ghost` взрывает сервера полиции по твоему адресу!\n\nДвери блокируются, системы тушем свет. ИРИС открывает для тебя секретный лифт. Ты сбегаешь в подземный город к повстанцам, держа в руках ключ от тайн Корпорации.\n\nНачинается новая глава Сопротивления! ✊"
             choices_view.controls.append(ft.ElevatedButton(content=ft.Text("Перезапустить игру 🔄"), on_click=lambda _: scene_router("day1_start")))
 
         page.update()
@@ -122,20 +122,21 @@ def main(page: ft.Page):
         style=ft.ButtonStyle(padding=20)
     ))
 
-    # Сборка финального футуристичного дизайна
+    # Сборка финального футуристичного дизайна (с безопасным скроллом)
     page.add(
         ft.Container(
             content=ft.Column([
                 ft.Row([title_text, stats_text], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 ft.Divider(color="cyan", height=2),
                 ft.Container(
-                    content=ft.SingleChildScrollView(content=terminal_output), 
+                    content=terminal_output, 
                     bgcolor="#0A0A0A", 
                     padding=15, 
                     border_radius=8, 
                     height=280, 
                     width=380,
-                    border=ft.border.all(1, "#333333")
+                    border=ft.border.all(1, "#333333"),
+                    scroll=ft.ScrollMode.AUTO # Починили тут: безопасный встроенный скролл
                 ),
                 ft.Container(height=10),
                 choices_view
