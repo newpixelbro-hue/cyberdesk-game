@@ -2,6 +2,10 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "CyberDesk: Подслушано в Сети"
+    
+    # Указываем точное имя твоей картинки для аватарки приложения
+    page.icon = "icongame.png"
+    
     page.theme_mode = ft.ThemeMode.DARK
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -77,14 +81,12 @@ def main(page: ft.Page):
         elif scene_name == "day3_start":
             terminal_output.value = "[СМЕНА 3]: Двери твоего кабинета выбивают штурмовики кибер-полиции.\nНа экране появляется лицо Полковника Варга:\n\n'Младший аналитик! Мы зафиксировали подозрительную активность с твоего IP. Либо ты платишь штраф в 200 CR на месте, либо мы вскрываем твои логи прямо сейчас!'"
             
-            # Проверка возможности дать взятку
             if credits_score >= 200:
                 choices_view.controls.append(ft.ElevatedButton(content=ft.Text("Дать взятку (200 CR) 💵", color="green"), on_click=lambda _: scene_router("ending_bribe")))
             
             choices_view.controls.append(ft.ElevatedButton(content=ft.Text("У меня нет таких денег! (Вскрыть логи) 🔓"), on_click=lambda _: scene_router("check_logs")))
 
         elif scene_name == "check_logs":
-            # Развилка на основе прошлых решений
             if rebel_trust > 0 and has_ai_friend:
                 scene_router("ending_rebel_ai")
             elif rebel_trust > 0 and not has_ai_friend:
@@ -108,7 +110,7 @@ def main(page: ft.Page):
             choices_view.controls.append(ft.ElevatedButton(content=ft.Text("Перезапустить игру 🔄"), on_click=lambda _: scene_router("day1_start")))
 
         elif scene_name == "ending_rebel_ai":
-            terminal_output.value = "=== ФИНАЛ 4: КИБЕР-ПРИЗРАК (ЛУЧШИЙ ФИНАЛ) ===\n\nПолиция пытается взломать твой терминал, но спасенный тобой ИИ ИРИС блокирует их сканеры! В этот же миг спасенный хакер `@neon_ghost` взрывает сервера полиции по твоему адресу!\n\nДвери блокируются, системы тушат свет. ИРИС открывает для тебя секретный лифт. Ты сбегаешь в подземный город к повстанцам, держа в руках ключ от тайн Корпорации.\n\nНачинается новая глава Сопротивления! ✊"
+            terminal_output.value = "=== ФИНАЛ 4: КИБЕР-ПРИЗРАК (ЛУЧШИЙ ФИНАЛ) ===\n\nПолиция пытается взломать твой terminal, но спасенный тобой ИИ ИРИС блокирует их сканеры! В этот же миг спасенный хакер `@neon_ghost` взрывает сервера полиции по твоему адресу!\n\nДвери блокируются, системы тушат свет. ИРИС открывает для тебя секретный лифт. Ты сбегаешь в подземный город к повстанцам, держа в руках ключ от тайн Корпорации.\n\nНачинается новая глава Сопротивления! ✊"
             choices_view.controls.append(ft.ElevatedButton(content=ft.Text("Перезапустить игру 🔄"), on_click=lambda _: scene_router("day1_start")))
 
         page.update()
